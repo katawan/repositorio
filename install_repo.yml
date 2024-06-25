@@ -1,0 +1,5 @@
+- name: Envia correos
+  hosts: all
+  tasks:
+  - name : Install the latest Apache package
+    yum: name=httpd state=latest update_cache=true

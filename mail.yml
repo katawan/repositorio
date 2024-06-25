@@ -1,0 +1,21 @@
+---
+- name: Envia correos
+  hosts: localhost
+  vars:
+     ip: "{{ var_nic_ip_address }}"
+     hostname: "{{ var_name + '.smt.tchile.local' }}" 
+     password: "{{ var_root_password }}"
+  tasks:
+  - name: Send email
+    mail:
+      host: 10.232.220.142
+      port: 25
+      subject: Provisionamiento de servidor Completado.
+      body: |
+         <p>
+         El servidor ha sido provisionado correctamente. Los datos de acceso son:<br/><br/><b>Hostname</b>: {{ hostname }}<br/><br/>Dirección ip: {{ ip }}<br/><br/>Usuario: root<br/><br/>Password:  {{ password }}<br/><br/><br/><br/>Atentamente,<br/><br/>CFME TChile.
+         </p>
+      from: cfadmin@tchile.com
+      to: "{{ var_correo_destino }}"
+      subtype: html
+
